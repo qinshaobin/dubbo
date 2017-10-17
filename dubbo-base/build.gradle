@@ -1,0 +1,35 @@
+project(":dubbo-base:api") {
+    description = "dubbo api"
+}
+
+project(":dubbo-base:consumer") {
+    apply from: "$rootDir/gradle/springbootProject.gradle"
+
+    dependencies {
+        compile (
+            project(":dubbo-base:api"),
+            extDependencies.spring_boot_web,
+            extDependencies.spring_boot_actuator,
+            extDependencies.spring_boot_devtools,
+            extDependencies.dubbo,
+            extDependencies.zookeeper,
+            extDependencies.zkclient,
+        )
+    }
+}
+
+project(":dubbo-base:provider") {
+    apply from: "$rootDir/gradle/springbootProject.gradle"
+
+    dependencies {
+        compile (
+            project(":dubbo-base:api"),
+            extDependencies.spring_boot_web,
+            extDependencies.spring_boot_actuator,
+            extDependencies.spring_boot_devtools,
+            extDependencies.dubbo,
+            extDependencies.zookeeper,
+            extDependencies.zkclient,
+        )
+    }
+}

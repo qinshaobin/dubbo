@@ -1,0 +1,67 @@
+ext {
+    versions = [
+            //compile
+            commons_lang3             = '3.6',
+            commons_collections       = '3.2.2',
+            guava                     = '22.0',
+            joda_time                 = '2.4',
+            spring_boot	              = '1.5.6.RELEASE',
+            fastjson                  = '1.2.38',
+            commons_text              = '1.1',
+            dubbo                     = '2.5.5',
+            zookeeper                 = '3.4.6',
+            zkclient                  = '0.1',
+            logback                   = '1.2.3',
+            dubbox                    = '2.8.4',
+            kryo                      = '2.24.0',
+            fst                       = '1.63',
+            resteasy                  = '3.0.18.Final',
+
+            //test
+
+            //provided
+            lombok                    = '1.16.18',
+    ]
+
+    commonDependencies = [
+            //compile
+            commons_lang3            : "org.apache.commons:commons-lang3:${commons_lang3}",
+            commons_collections      : "commons-collections:commons-collections:${commons_collections}",
+            guava                    : "com.google.guava:guava:${guava}",
+            joda_time                : "joda-time:joda-time:${joda_time}",
+            fastjson                 : "com.alibaba:fastjson:${fastjson}",
+            commons_text             : "org.apache.commons:commons-text:${commons_text}",
+            logback_classic          : "ch.qos.logback:logback-classic:${logback}",
+            logback_access           : "ch.qos.logback:logback-access:${logback}",
+
+            //test
+            spring_boot_starter_test :	"org.springframework.boot:spring-boot-starter-test:${spring_boot}",
+
+            //provided
+            lombok                   : "org.projectlombok:lombok:${lombok}",
+    ]
+
+    extDependencies = [
+            //compile
+            spring_boot_web          : "org.springframework.boot:spring-boot-starter-web:${spring_boot}",
+            //spring boot健康监控
+            spring_boot_actuator     : "org.springframework.boot:spring-boot-starter-actuator:${spring_boot}",
+            //spring boot热部署
+            spring_boot_devtools     : "org.springframework.boot:spring-boot-devtools:${spring_boot}",
+
+            zookeeper                : "org.apache.zookeeper:zookeeper:${zookeeper}",
+            zkclient                 : "com.github.sgroschupf:zkclient:${zkclient}",
+
+            // dubbo
+            dubbo                    : "com.alibaba:dubbo:${dubbo}",
+            // dubbox
+            dubbox                   : "com.alibaba:dubbo:${dubbox}",
+            kryo                     : "com.esotericsoftware.kryo:kryo:${kryo}",
+            kryo_serializers         : "de.javakaffee:kryo-serializers:0.41",
+            fst                      : "de.ruedigermoeller:fst:${fst}",
+            resteasy_jaxrs           : "org.jboss.resteasy:resteasy-jaxrs:${resteasy}",
+            resteasy_client          : "org.jboss.resteasy:resteasy-jaxrs:${resteasy}",
+            resteasy_jackson_provider: "org.jboss.resteasy:resteasy-jaxrs:${resteasy}",
+            resteasy_jaxb_provider   : "org.jboss.resteasy:resteasy-jaxrs:${resteasy}",
+    ]
+}

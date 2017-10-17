@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="${dubbo.application.name}" />
+
+    <!-- 注册中心暴露服务地址 -->
+    <dubbo:registry protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}" />
+
+    <!-- 暴露服务方式:dubbo,http,rest,webservice,hessian -->
+    <!-- 暴露服务方式:dubbo,默认序列化方式为hessian2 -->
+    <!--<dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" />-->
+    <!-- 暴露服务方式:dubbo,序列化方式为kryo -->
+    <!--<dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" serialization="kryo"
+                    optimizer="com.bin.dubbox.api.common.SerializationOptimizerImpl" />-->
+    <!-- 暴露服务方式:dubbo,序列化方式为fst -->
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" serialization="fst"
+                    optimizer="com.bin.dubbox.api.common.SerializationOptimizerImpl" />
+
+    <!-- 暴露服务方式:rest,使用tomcat服务器 -->
+    <dubbo:protocol name="rest" port="${rest.protocol.port}" threads="500" contextpath="restServices" server="tomcat"
+                    accepts="500"
+                    extension="com.bin.dubbox.api.extension.TraceInterceptor,
+                    com.bin.dubbox.api.extension.TraceFilter,
+                    com.bin.dubbox.api.extension.ClientTraceFilter,
+                    com.bin.dubbox.api.extension.DynamicTraceBinding,
+                    com.bin.dubbox.api.extension.CustomExceptionMapper,
+                    com.alibaba.dubbo.rpc.protocol.rest.support.LoggingFilter" />
+    <!-- 暴露服务方式:webservice -->
+    <!--<dubbo:protocol name="webservice" port="${webservice.protocol.port}" />-->
+
+    <!-- 注册服务 -->
+    <!-- dubbo服务-->
+    <dubbo:service protocol="dubbo" interface="com.bin.dubbox.api.service.HelloService" ref="helloServiceImpl"
+                   retries="0" timeout="6000" />
+    <dubbo:service protocol="dubbo" interface="com.bin.dubbox.api.service.AccBalanceQueryService" ref="accBalanceQueryServiceImpl"
+                   retries="0" timeout="6000" />
+    <dubbo:service protocol="dubbo" interface="com.bin.dubbox.api.service.UserQueryService" ref="userQueryServiceImpl"
+                   retries="0" timeout="6000" />
+    <!-- rest服务 -->
+    <dubbo:service protocol="rest" interface="com.bin.dubbox.api.service.rest.UserQueryRestService" ref="userQueryRestServiceImpl"
+                   retries="0" timeout="6000" />
+</beans>
+

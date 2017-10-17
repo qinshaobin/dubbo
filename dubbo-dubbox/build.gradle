@@ -1,0 +1,47 @@
+project(":dubbo-dubbox:api") {
+    description = "dubbox api"
+    dependencies {
+        compile (
+            extDependencies.resteasy_jaxrs,
+            extDependencies.dubbox,
+            extDependencies.kryo,
+            extDependencies.kryo_serializers,
+            extDependencies.fst,
+            extDependencies.resteasy_client,
+            extDependencies.resteasy_jackson_provider,
+            extDependencies.resteasy_jaxb_provider,
+        )
+    }
+}
+
+project(":dubbo-dubbox:consumer") {
+    apply from: "$rootDir/gradle/springbootProject.gradle"
+
+    dependencies {
+        compile (
+            project(":dubbo-dubbox:api"),
+            extDependencies.spring_boot_web,
+            extDependencies.spring_boot_actuator,
+            //extDependencies.spring_boot_devtools,
+            extDependencies.dubbox,
+            extDependencies.zookeeper,
+            extDependencies.zkclient,
+        )
+    }
+}
+
+project(":dubbo-dubbox:provider") {
+    apply from: "$rootDir/gradle/springbootProject.gradle"
+
+    dependencies {
+        compile (
+            project(":dubbo-dubbox:api"),
+            extDependencies.spring_boot_web,
+            extDependencies.spring_boot_actuator,
+            //extDependencies.spring_boot_devtools,
+            extDependencies.dubbox,
+            extDependencies.zookeeper,
+            extDependencies.zkclient,
+        )
+    }
+}
